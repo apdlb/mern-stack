@@ -28,7 +28,9 @@
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "core-js": "^3.2.1",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^3.10.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
