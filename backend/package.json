@@ -1,0 +1,53 @@
+{
+  "name": "mern-backend",
+  "version": "1.0.0",
+  "description": "MERN backend",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "rimraf lib && babel src --out-dir lib",
+    "start": "node lib",
+    "start:dev": "nodemon -L -w .env -w src --exec babel-node src --source-maps",
+    "prestart": "npm run build",
+    "precommit": "lint-staged"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apdlb/mern-stack.git"
+  },
+  "keywords": [
+    "mongodb",
+    "express",
+    "node.js"
+  ],
+  "author": "Alejandro Páez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/apdlb/mern-stack/issues"
+  },
+  "homepage": "https://github.com/apdlb/mern-stack#readme",
+  "dependencies": {
+    "@babel/polyfill": "^7.4.4",
+    "core-js": "^3.2.1",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "eslint": "^6.3.0",
+    "eslint-config-prettier": "^6.2.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.2.5",
+    "nodemon": "^1.19.2",
+    "prettier": "^1.18.2",
+    "rimraf": "^3.0.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}
