@@ -1,0 +1,21 @@
+version: '3'
+services:
+  backend:
+    build: ./
+    hostname: backend
+    volumes:
+      - ./:/app/
+      - .env.docker:/app/.env
+    ports:
+      - 3000:3000
+    entrypoint: /bin/sh
+    command: -c "sleep 5 && npm run start:dev"
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    container_name: 'mongodb'
+    ports:
+      - 27017:27017
+    command: mongod

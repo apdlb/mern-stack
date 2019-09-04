@@ -11,6 +11,7 @@ import routes from './routes';
 import logger from './util/logger';
 
 require('./util/env');
+require('./database');
 
 const app = express();
 
