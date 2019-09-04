@@ -15,8 +15,8 @@ if (!fs.existsSync(logDir)) {
 /**
  * Formato del log
  */
-const myFormat = winston.format.printf(({ level, message, timestamp }) => {
-  return `${timestamp} - ${level}: ${message}`;
+const myFormat = winston.format.printf(({ level, message, timestamp, stack }) => {
+  return `${timestamp} - ${level}: ${stack ? stack : message}`;
 });
 
 /**
@@ -24,6 +24,7 @@ const myFormat = winston.format.printf(({ level, message, timestamp }) => {
  */
 const logger = winston.createLogger({
   levels: winston.config.syslog.levels,
+  format: winston.format.combine(winston.format.errors({ stack: true })),
   transports: [
     new winston.transports.Console({
       level: 'info',
