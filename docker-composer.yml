@@ -1,0 +1,35 @@
+version: '3'
+services:
+  backend:
+    build: ./backend
+    container_name: backend
+    volumes:
+      - ./backend/:/app/
+      - /app/node_modules
+    ports:
+      - 3000:3000
+    entrypoint: /bin/sh
+    command: -c "sleep 5 && npm run start:dev"
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    volumes:
+      - ./frontend/:/app/
+      - /app/node_modules
+    ports:
+      - 3001:3001
+      - 35729:35729
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - PORT=3001
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    command: mongod
