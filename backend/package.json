@@ -27,6 +27,7 @@
   "homepage": "https://github.com/apdlb/mern-stack#readme",
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
+    "@hapi/joi": "^15.1.1",
     "body-parser": "^1.19.0",
     "boom": "^7.3.0",
     "core-js": "^3.2.1",

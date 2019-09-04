@@ -8,9 +8,9 @@ import path from 'path';
 import * as errorHandler from './middleware/errorHandler';
 import json from './middleware/json';
 import routes from './routes';
-import logger from './util/logger';
+import logger from './utils/logger';
 
-require('./util/env');
+require('./utils/env');
 require('./database');
 
 const app = express();

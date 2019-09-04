@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-import logger from '../util/logger';
+import logger from '../utils/logger';
 
 // Conexión DB
 let dbString = 'mongodb://';
