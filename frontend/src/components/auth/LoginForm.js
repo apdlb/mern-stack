@@ -8,7 +8,13 @@ const validate = values => {
 };
 
 const LoginForm = props => {
-  return <div>Prueba</div>;
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col-sm-12">Prueba</div>
+      </div>
+    </div>
+  );
 };
 
 export default reduxForm({
