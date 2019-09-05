@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { LocalizeProvider } from 'react-localize-redux';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 
@@ -13,7 +14,9 @@ import { persistor, store } from './store';
 const rootComponent = (
   <Provider store={store}>
     <PersistGate persistor={persistor}>
-      <App />
+      <LocalizeProvider store={store}>
+        <App />
+      </LocalizeProvider>
     </PersistGate>
   </Provider>
 );

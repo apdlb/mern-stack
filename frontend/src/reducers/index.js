@@ -1,6 +1,8 @@
+import { localizeReducer } from 'react-localize-redux';
 import { combineReducers } from 'redux';
-import { reducer as reduxForm } from 'redux-form';
+import { reducer as formReducer } from 'redux-form';
 
 export default combineReducers({
-  form: reduxForm
+  form: formReducer,
+  localize: localizeReducer
 });
