@@ -1,4 +1,5 @@
 import React from 'react';
+import { Translate } from 'react-localize-redux';
 import { reduxForm } from 'redux-form';
 
 const validate = values => {
@@ -9,11 +10,17 @@ const validate = values => {
 
 const LoginForm = props => {
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-sm-12">Prueba</div>
-      </div>
-    </div>
+    <Translate>
+      {({ translate }) => {
+        return (
+          <div className="container">
+            <div className="row">
+              <div className="col-sm-12">{translate('auth.labels.email')}</div>
+            </div>
+          </div>
+        );
+      }}
+    </Translate>
   );
 };
 
