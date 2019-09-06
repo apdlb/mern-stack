@@ -4,7 +4,10 @@ import { Translate } from 'react-localize-redux';
 class InputTextField extends Component {
   render() {
     const {
-      input: { onChange, ...resInput },
+      field: {
+        input: { onChange, ...resInput },
+        meta: { touched, error, warning }
+      },
       id,
       label,
       placeholder,
@@ -18,8 +21,7 @@ class InputTextField extends Component {
       onChangeValue,
       readOnly,
       disabled,
-      required,
-      meta: { touched, error, warning }
+      required
     } = this.props;
 
     return (

@@ -1,9 +1,12 @@
 import React from 'react';
+import { useField, useForm } from 'react-final-form-hooks';
 import { Translate } from 'react-localize-redux';
-import { Field } from 'redux-form';
-import { reduxForm } from 'redux-form';
 
 import InputTextField from '../form/InputTextField';
+
+const onSubmit = values => {
+  window.alert(JSON.stringify(values, 0, 2));
+};
 
 const validate = values => {
   const errors = [];
@@ -19,8 +22,14 @@ const validate = values => {
   return errors;
 };
 
-const LoginForm = props => {
-  const { handleSubmit, pristine, submiting, invalid } = props;
+const LoginForm = ({ dispatch }) => {
+  const { form, handleSubmit, pristine, submitting, invalid } = useForm({
+    onSubmit,
+    validate
+  });
+
+  const email = useField('email', form);
+  const password = useField('password', form);
 
   return (
     <Translate>
@@ -30,17 +39,17 @@ const LoginForm = props => {
             <form onSubmit={handleSubmit}>
               <div className="row">
                 <div className="col-sm-12">
-                  <Field id="email" name="email" email label={translate('auth.labels.email')} component={InputTextField} />
+                  <InputTextField id="email" label={translate('auth.labels.email')} email field={email} />
                 </div>
               </div>
               <div className="row">
                 <div className="col-sm-12">
-                  <Field id="password" name="password" password label={translate('auth.labels.password')} component={InputTextField} />
+                  <InputTextField id="password" label={translate('auth.labels.password')} password field={password} />
                 </div>
               </div>
               <div className="row">
                 <div className="col-sm-12">
-                  <button className="btn btn-lg btn-primary" type="submit" disabled={pristine || submiting || invalid}>
+                  <button className="btn btn-lg btn-primary" type="submit" disabled={pristine || submitting || invalid}>
                     {translate('auth.labels.login')}
                   </button>
                 </div>
@@ -53,7 +62,4 @@ const LoginForm = props => {
   );
 };
 
-export default reduxForm({
-  form: 'LoginForm',
-  validate
-})(LoginForm);
+export default LoginForm;

@@ -1,19 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { login } from '../../actions/AuthActions';
 import LoginForm from '../../components/auth/LoginForm';
 import Body from '../../components/layout/Body';
 
-const onSubmit = values => {};
-
-const Login = () => {
+const Login = props => {
   const initialValues = {};
 
-  return <Body body={<LoginForm initialValues={initialValues} onSubmit={onSubmit} />} />;
+  return <Body body={<LoginForm initialValues={initialValues} />} />;
 };
 
-export default connect(
-  null,
-  { login }
-)(Login);
+export default connect(null)(Login);
