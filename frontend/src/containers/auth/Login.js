@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { login } from '../../actions/AuthActions';
 import LoginForm from '../../components/auth/LoginForm';
 import Body from '../../components/layout/Body';
 
-const onSubmit = values => {
-  console.log(values);
-};
+const onSubmit = values => {};
 
 const Login = () => {
   const initialValues = {};
@@ -16,5 +15,5 @@ const Login = () => {
 
 export default connect(
   null,
-  {}
+  { login }
 )(Login);

@@ -5,6 +5,7 @@ class InputTextareaField extends Component {
   render() {
     const {
       input: { onChange, ...resInput },
+      id,
       label,
       placeholder,
       className,
@@ -18,44 +19,47 @@ class InputTextareaField extends Component {
     } = this.props;
     return (
       <Translate>
-        {(translate, activeLanguage, languages) => (
-          <div className="form-group">
-            <div className="row">
-              <div className={`col-12 ${divClassName ? divClassName : ''}`}>
-                <label className="control-label">{`${label}${required ? ' *' : ''}`}</label>
-              </div>
-            </div>
-            <div className="row">
-              <div className={`col-12 ${divClassName ? divClassName : ''}`}>
-                <textarea
-                  {...resInput}
-                  placeholder={placeholder}
-                  className={className ? className : ''}
-                  style={{ resize: 'none' }}
-                  readOnly={readOnly}
-                  onChange={event => {
-                    onChange(event);
-                    if (onChangeValue) {
-                      onChangeValue(event);
-                    }
-                  }}
-                />
-              </div>
-            </div>
-            {touched &&
-              error &&
-              ((translate(error) && (
-                <div className={`col-12 has-error ${divClassNameError ? divClassNameError : ''}`}>
-                  <span className="help-block">{translate(error)}</span>
+        {({ translate }) => {
+          return (
+            <div className="form-group">
+              <div className="row">
+                <div className={`col-12 ${divClassName ? divClassName : ''}`}>
+                  <label htmlFor={id}>{`${label}${required ? ' *' : ''}`}</label>
                 </div>
-              )) ||
-                (warning && (
-                  <div className={`col-12 has-warning ${divClassNameWarning ? divClassNameWarning : ''}`}>
-                    <span className="help-block">{warning}</span>
+              </div>
+              <div className="row">
+                <div className={`col-12 ${divClassName ? divClassName : ''}`}>
+                  <textarea
+                    {...resInput}
+                    id={id}
+                    placeholder={placeholder}
+                    className={className ? className : ''}
+                    style={{ resize: 'none' }}
+                    readOnly={readOnly}
+                    onChange={event => {
+                      onChange(event);
+                      if (onChangeValue) {
+                        onChangeValue(event);
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+              {touched &&
+                error &&
+                ((translate(error) && (
+                  <div className={`col-12 has-error ${divClassNameError ? divClassNameError : ''}`}>
+                    <span className="help-block">{translate(error)}</span>
                   </div>
-                )))}
-          </div>
-        )}
+                )) ||
+                  (warning && (
+                    <div className={`col-12 has-warning ${divClassNameWarning ? divClassNameWarning : ''}`}>
+                      <span className="help-block">{warning}</span>
+                    </div>
+                  )))}
+            </div>
+          );
+        }}
       </Translate>
     );
   }

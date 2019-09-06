@@ -5,6 +5,7 @@ class InputCheckboxField extends Component {
   render() {
     const {
       input: { onChange, ...resInput },
+      id,
       label,
       placeholder,
       className,
@@ -20,40 +21,43 @@ class InputCheckboxField extends Component {
 
     return (
       <Translate>
-        {(translate, activeLanguage, languages) => (
-          <div className="row form-group">
-            <div className={`col-12 ${divClassName ? divClassName : ''} flex`}>
-              <input
-                {...resInput}
-                placeholder={placeholder}
-                type="checkbox"
-                checked={resInput.value}
-                className={className ? className : ''}
-                readOnly={readOnly}
-                disabled={disabled}
-                onChange={async event => {
-                  await onChange(event);
-                  if (onChangeValue) {
-                    await onChangeValue(event);
-                  }
-                }}
-              />
-              <label className="control-label text-left">{`${label}${required ? ' *' : ''}`}</label>
-            </div>
-            {touched &&
-              error &&
-              ((translate(error) && (
-                <div className={`col-12 has-error ${divClassNameError ? divClassNameError : ''} text-left`}>
-                  <span className="help-block">{translate(error)}</span>
-                </div>
-              )) ||
-                (warning && (
-                  <div className={`col-12 has-warning ${divClassNameWarning ? divClassNameWarning : ''} text-left`}>
-                    <span className="help-block">{warning}</span>
+        {({ translate }) => {
+          return (
+            <div className="row form-group">
+              <div className={`col-12 ${divClassName ? divClassName : ''} flex`}>
+                <input
+                  {...resInput}
+                  id={id}
+                  placeholder={placeholder}
+                  type="checkbox"
+                  checked={resInput.value}
+                  className={className ? className : ''}
+                  readOnly={readOnly}
+                  disabled={disabled}
+                  onChange={async event => {
+                    await onChange(event);
+                    if (onChangeValue) {
+                      await onChangeValue(event);
+                    }
+                  }}
+                />
+                <label htmlFor={id} style={{ textAlign: 'left' }}>{`${label}${required ? ' *' : ''}`}</label>
+              </div>
+              {touched &&
+                error &&
+                ((translate(error) && (
+                  <div className={`col-12 has-error ${divClassNameError ? divClassNameError : ''}`} style={{ textAlign: 'left' }}>
+                    <span className="help-block">{translate(error)}</span>
                   </div>
-                )))}
-          </div>
-        )}
+                )) ||
+                  (warning && (
+                    <div className={`col-12 has-warning ${divClassNameWarning ? divClassNameWarning : ''}`} style={{ textAlign: 'left' }}>
+                      <span className="help-block">{warning}</span>
+                    </div>
+                  )))}
+            </div>
+          );
+        }}
       </Translate>
     );
   }

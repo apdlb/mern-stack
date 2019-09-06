@@ -1,3 +1,5 @@
 {
-  "validations": {}
+  "validations": {
+    "required": ["Field is required", "El campo es obligatorio"]
+  }
 }

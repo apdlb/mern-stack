@@ -9,6 +9,7 @@ class InputDateField extends Component {
   render() {
     const {
       input: { value, ...resInput },
+      id,
       label,
       className,
       divClassName,
@@ -21,43 +22,46 @@ class InputDateField extends Component {
 
     return (
       <Translate>
-        {(translate, activeLanguage, languages) => (
-          <div className="form-group">
-            <div className="row">
-              <div className={`col-12 ${divClassName ? divClassName : ''}`}>
-                <label className="control-label">{`${label}${required ? ' *' : ''}`}</label>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-12">
-                <DatePicker
-                  {...resInput}
-                  className={className ? className : ''}
-                  selected={value ? moment(value) : null}
-                  dateFormat={`MM/DD/YYYY${showTimeSelect ? ' HH:mm' : ''}`}
-                  placeholderText={`MM/DD/YYYY${showTimeSelect ? ' HH:mm' : ''}`}
-                  showMonthDropdown
-                  showYearDropdown
-                  dropdownMode="select"
-                  showTimeSelect={showTimeSelect ? true : false}
-                  timeFormat="HH:mm"
-                />
-              </div>
-            </div>
-            {touched &&
-              error &&
-              ((translate(error) && (
-                <div className={`col-12 has-error ${divClassNameError ? divClassNameError : ''}`}>
-                  <span className="help-block">{translate(error)}</span>
+        {({ translate }) => {
+          return (
+            <div className="form-group">
+              <div className="row">
+                <div className={`col-12 ${divClassName ? divClassName : ''}`}>
+                  <label htmlFor={id}>{`${label}${required ? ' *' : ''}`}</label>
                 </div>
-              )) ||
-                (warning && (
-                  <div className={`col-12 has-warning ${divClassNameWarning ? divClassNameWarning : ''}`}>
-                    <span className="help-block">{warning}</span>
+              </div>
+              <div className="row">
+                <div className="col-12">
+                  <DatePicker
+                    {...resInput}
+                    id={id}
+                    className={className ? className : ''}
+                    selected={value ? moment(value) : null}
+                    dateFormat={`MM/DD/YYYY${showTimeSelect ? ' HH:mm' : ''}`}
+                    placeholderText={`MM/DD/YYYY${showTimeSelect ? ' HH:mm' : ''}`}
+                    showMonthDropdown
+                    showYearDropdown
+                    dropdownMode="select"
+                    showTimeSelect={showTimeSelect ? true : false}
+                    timeFormat="HH:mm"
+                  />
+                </div>
+              </div>
+              {touched &&
+                error &&
+                ((translate(error) && (
+                  <div className={`col-12 has-error ${divClassNameError ? divClassNameError : ''}`}>
+                    <span className="help-block">{translate(error)}</span>
                   </div>
-                )))}
-          </div>
-        )}
+                )) ||
+                  (warning && (
+                    <div className={`col-12 has-warning ${divClassNameWarning ? divClassNameWarning : ''}`}>
+                      <span className="help-block">{warning}</span>
+                    </div>
+                  )))}
+            </div>
+          );
+        }}
       </Translate>
     );
   }

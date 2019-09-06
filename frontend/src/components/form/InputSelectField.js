@@ -5,6 +5,7 @@ class InputSelectField extends Component {
   render() {
     const {
       input: { onChange, ...resInput },
+      id,
       label,
       className,
       divClassName,
@@ -18,44 +19,47 @@ class InputSelectField extends Component {
     } = this.props;
     return (
       <Translate>
-        {(translate, activeLanguage, languages) => (
-          <div className="form-group">
-            <div className="row">
-              <div className={`col-12 ${divClassName ? divClassName : ''}`}>
-                <label className="control-label">{`${label}${required ? ' *' : ''}`}</label>
-              </div>
-            </div>
-            <div className="row">
-              <div className={`col-12 ${divClassName ? divClassName : ''}`}>
-                <select
-                  {...resInput}
-                  className={className ? className : ''}
-                  disabled={disabled}
-                  onChange={async event => {
-                    await onChange(event);
-                    if (onChangeValue) {
-                      await onChangeValue(event);
-                    }
-                  }}
-                >
-                  {children}
-                </select>
-              </div>
-            </div>
-            {touched &&
-              error &&
-              ((translate(error) && (
-                <div className={`col-12 has-error ${divClassNameError ? divClassNameError : ''}`}>
-                  <span className="help-block">{translate(error)}</span>
+        {({ translate }) => {
+          return (
+            <div className="form-group">
+              <div className="row">
+                <div className={`col-12 ${divClassName ? divClassName : ''}`}>
+                  <label htmlFor={id}>{`${label}${required ? ' *' : ''}`}</label>
                 </div>
-              )) ||
-                (warning && (
-                  <div className={`col-12 has-warning ${divClassNameWarning ? divClassNameWarning : ''}`}>
-                    <span className="help-block">{warning}</span>
+              </div>
+              <div className="row">
+                <div className={`col-12 ${divClassName ? divClassName : ''}`}>
+                  <select
+                    {...resInput}
+                    id={id}
+                    className={className ? className : ''}
+                    disabled={disabled}
+                    onChange={async event => {
+                      await onChange(event);
+                      if (onChangeValue) {
+                        await onChangeValue(event);
+                      }
+                    }}
+                  >
+                    {children}
+                  </select>
+                </div>
+              </div>
+              {touched &&
+                error &&
+                ((translate(error) && (
+                  <div className={`col-12 has-error ${divClassNameError ? divClassNameError : ''}`}>
+                    <span className="help-block">{translate(error)}</span>
                   </div>
-                )))}
-          </div>
-        )}
+                )) ||
+                  (warning && (
+                    <div className={`col-12 has-warning ${divClassNameWarning ? divClassNameWarning : ''}`}>
+                      <span className="help-block">{warning}</span>
+                    </div>
+                  )))}
+            </div>
+          );
+        }}
       </Translate>
     );
   }

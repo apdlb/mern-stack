@@ -27,10 +27,9 @@ export const apiGet = (url, params) => () => {
     headers: localStorage.getItem('jwtToken')
       ? new Headers({
           'Content-type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('jwtToken'),
-          languageid: localStorage.getItem('preferedLanguageID')
+          Authorization: 'Bearer ' + localStorage.getItem('jwtToken')
         })
-      : new Headers({ 'Content-type': 'application/json', languageid: localStorage.getItem('preferedLanguageID') })
+      : new Headers({ 'Content-type': 'application/json' })
   })
     .then(v => {
       if (v.status === 401) {
@@ -60,10 +59,9 @@ export const apiPut = (url, obj, params) => () => {
     headers: localStorage.getItem('jwtToken')
       ? new Headers({
           'Content-type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('jwtToken'),
-          languageid: localStorage.getItem('preferedLanguageID')
+          Authorization: 'Bearer ' + localStorage.getItem('jwtToken')
         })
-      : new Headers({ 'Content-type': 'application/json', languageid: localStorage.getItem('preferedLanguageID') })
+      : new Headers({ 'Content-type': 'application/json' })
   })
     .then(v => {
       if (v.status === 401) {
@@ -90,9 +88,7 @@ export const apiPutFile = (url, obj, params) => () => {
   return fetch(urlWithParams(url, params), {
     method: 'PUT',
     body: obj,
-    headers: localStorage.getItem('jwtToken')
-      ? new Headers({ Authorization: 'Bearer ' + localStorage.getItem('jwtToken') })
-      : new Headers({ 'Content-type': 'application/json' })
+    headers: localStorage.getItem('jwtToken') ? new Headers({ Authorization: 'Bearer ' + localStorage.getItem('jwtToken') }) : new Headers({})
   })
     .then(v => {
       if (v.status === 401) {
@@ -122,10 +118,9 @@ export const apiPost = (url, obj, params) => () => {
     headers: localStorage.getItem('jwtToken')
       ? new Headers({
           'Content-type': 'application/json',
-          /**'Content-type': 'multipart/form-data',**/ Authorization: 'Bearer ' + localStorage.getItem('jwtToken'),
-          languageid: localStorage.getItem('preferedLanguageID')
+          Authorization: 'Bearer ' + localStorage.getItem('jwtToken')
         })
-      : new Headers({ 'Content-type': 'application/json', languageid: localStorage.getItem('preferedLanguageID') })
+      : new Headers({ 'Content-type': 'application/json' })
   })
     .then(v => {
       if (v.status === 401) {
@@ -152,9 +147,7 @@ export const apiPostFile = (url, obj, params) => () => {
   return fetch(urlWithParams(url, params), {
     method: 'POST',
     body: obj,
-    headers: localStorage.getItem('jwtToken')
-      ? new Headers({ Authorization: 'Bearer ' + localStorage.getItem('jwtToken'), languageid: localStorage.getItem('preferedLanguageID') })
-      : new Headers({ 'Content-type': 'application/json', languageid: localStorage.getItem('preferedLanguageID') })
+    headers: localStorage.getItem('jwtToken') ? new Headers({ Authorization: 'Bearer ' + localStorage.getItem('jwtToken') }) : new Headers({})
   })
     .then(v => {
       if (v.status === 401) {
@@ -183,10 +176,9 @@ export const apiDelete = (url, params) => () => {
     headers: localStorage.getItem('jwtToken')
       ? new Headers({
           'Content-type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('jwtToken'),
-          languageid: localStorage.getItem('preferedLanguageID')
+          Authorization: 'Bearer ' + localStorage.getItem('jwtToken')
         })
-      : new Headers({ 'Content-type': 'application/json', languageid: localStorage.getItem('preferedLanguageID') })
+      : new Headers({ 'Content-type': 'application/json' })
   })
     .then(async v => {
       if (v.status === 401) {
