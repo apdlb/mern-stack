@@ -3,10 +3,12 @@ import { Translate } from 'react-localize-redux';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { login } from '../../actions/AuthActions';
-import useSignUpForm from './CustomHooks';
+import useError from '../../hooks/ErrorHook';
+import useForm from '../../hooks/FormHook';
 
 const LoginFormHook = () => {
   const dispatch = useDispatch();
+  const { errorControl } = useError();
 
   const signup = async () => {
     alert(`User Created!
@@ -19,10 +21,11 @@ const LoginFormHook = () => {
       })
       .catch(err => {
         console.log('Error', err);
+        errorControl(err, true);
       });
   };
 
-  const { inputs, handleInputChange, handleSubmit } = useSignUpForm(signup);
+  const { inputs, handleInputChange, handleSubmit } = useForm(signup);
   const auth = useSelector(state => state.auth);
 
   return (

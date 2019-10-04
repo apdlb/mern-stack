@@ -3,7 +3,7 @@ import './App.css';
 import React, { useEffect } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { addTranslation, initialize, withLocalize } from 'react-localize-redux';
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import CONSTANTS from './constants';
@@ -52,4 +52,4 @@ const App = () => {
   );
 };
 
-export default connect(null)(withLocalize(App));
+export default withLocalize(App);

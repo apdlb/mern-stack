@@ -1,3 +1,5 @@
 {
-  "generic": {}
+  "generic": {
+    "error": ["An error has occurred", "Ha ocurrido un error"]
+  }
 }
