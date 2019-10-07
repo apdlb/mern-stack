@@ -12,8 +12,10 @@ const router = Router();
  */
 router.post('/', authValidator.loginValidator, (req, res) => {
   res.json({
-    app: req.app.locals.title,
-    apiVersion: 'auth'
+    data: {
+      app: req.app.locals.title,
+      apiVersion: 'auth'
+    }
   });
 });
 
