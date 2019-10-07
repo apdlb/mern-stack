@@ -5,11 +5,9 @@ import Swal from 'sweetalert2';
 const renderErrorBody = (message, details) => {
   let body = '';
 
-  if (details) {
-    if (details instanceof Array) {
-      for (const error of details) {
-        body += `- ${error.message}<br>`;
-      }
+  if (details && details instanceof Array) {
+    for (const error of details) {
+      body += `- ${error.message}<br>`;
     }
   } else {
     body = message;
@@ -23,7 +21,7 @@ const useError = () => {
   const props = store.getState();
   const translate = getTranslate(props.localize);
 
-  const errorControl = (err, modal = false, redirect) => {
+  const errorControl = (err, redirect) => {
     let code, details, message;
 
     code = err.code;

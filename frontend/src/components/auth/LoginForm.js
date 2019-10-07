@@ -1,12 +1,8 @@
 import React from 'react';
-import { useField, useForm } from 'react-final-form-hooks';
 import { Translate } from 'react-localize-redux';
+import { Field, reduxForm } from 'redux-form';
 
 import InputTextField from '../form/InputTextField';
-
-const onSubmit = values => {
-  window.alert(JSON.stringify(values, 0, 2));
-};
 
 const validate = values => {
   const errors = [];
@@ -22,15 +18,7 @@ const validate = values => {
   return errors;
 };
 
-const LoginForm = ({ dispatch }) => {
-  const { form, handleSubmit, pristine, submitting, invalid } = useForm({
-    onSubmit,
-    validate
-  });
-
-  const email = useField('email', form);
-  const password = useField('password', form);
-
+const LoginForm = ({ handleSubmit, pristine, submitting, invalid }) => {
   return (
     <Translate>
       {({ translate }) => {
@@ -39,12 +27,12 @@ const LoginForm = ({ dispatch }) => {
             <form onSubmit={handleSubmit}>
               <div className="row">
                 <div className="col-sm-12">
-                  <InputTextField id="email" label={translate('auth.labels.email')} email field={email} />
+                  <Field id="email" name="email" label={translate('auth.labels.email')} email component={InputTextField} />
                 </div>
               </div>
               <div className="row">
                 <div className="col-sm-12">
-                  <InputTextField id="password" label={translate('auth.labels.password')} password field={password} />
+                  <Field id="password" name="password" label={translate('auth.labels.password')} password component={InputTextField} />
                 </div>
               </div>
               <div className="row">
@@ -62,4 +50,7 @@ const LoginForm = ({ dispatch }) => {
   );
 };
 
-export default LoginForm;
+export default reduxForm({
+  form: 'loginForm',
+  validate
+})(LoginForm);
