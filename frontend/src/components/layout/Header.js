@@ -1,7 +1,11 @@
 import React from 'react';
 
 const Header = () => {
-  return <div className="grid-header"></div>;
+  return (
+    <header className="grid-header">
+      <h3>HEADER</h3>
+    </header>
+  );
 };
 
 export default Header;

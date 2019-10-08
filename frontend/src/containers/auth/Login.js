@@ -11,7 +11,6 @@ const Login = () => {
   const { errorControl } = useError();
 
   const onSubmit = values => {
-    console.log('Submit');
     dispatch(login(values))
       .then(r => {
         console.log('Hola', r);

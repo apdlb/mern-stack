@@ -1,5 +1,4 @@
 import './index.css';
-import './styles/grid.scss';
 import 'antd/dist/antd.css';
 
 import React from 'react';

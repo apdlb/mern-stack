@@ -1,3 +1,5 @@
+import './styles/grid.scss';
+
 import React, { useEffect } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { addTranslation, initialize, withLocalize } from 'react-localize-redux';
