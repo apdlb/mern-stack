@@ -1,8 +1,9 @@
+import { Button, Form } from 'antd';
 import React from 'react';
 import { Translate } from 'react-localize-redux';
 import { Field, reduxForm } from 'redux-form';
 
-import InputTextField from '../form/InputTextField';
+import { InputField, InputPasswordField } from '../form/Fields';
 
 const validate = values => {
   const errors = [];
@@ -23,26 +24,16 @@ const LoginForm = ({ handleSubmit, pristine, submitting, invalid }) => {
     <Translate>
       {({ translate }) => {
         return (
-          <div className="container">
-            <form onSubmit={handleSubmit}>
-              <div className="row">
-                <div className="col-sm-12">
-                  <Field id="email" name="email" label={translate('auth.labels.email')} email component={InputTextField} />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-sm-12">
-                  <Field id="password" name="password" label={translate('auth.labels.password')} password component={InputTextField} />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-sm-12">
-                  <button className="btn btn-lg btn-primary" type="submit" disabled={pristine || submitting || invalid}>
-                    {translate('auth.labels.login')}
-                  </button>
-                </div>
-              </div>
-            </form>
+          <div className="">
+            <Form onSubmit={handleSubmit} layout="vertical">
+              <Field email="true" name="email" label={translate('auth.labels.email')} component={InputField} />
+              <Field password="true" name="password" label={translate('auth.labels.password')} component={InputPasswordField} />
+              <Form.Item>
+                <Button htmlType="submit" type="primary" disabled={pristine || submitting || invalid}>
+                  {translate('auth.labels.login')}
+                </Button>
+              </Form.Item>
+            </Form>
           </div>
         );
       }}
@@ -52,5 +43,6 @@ const LoginForm = ({ handleSubmit, pristine, submitting, invalid }) => {
 
 export default reduxForm({
   form: 'loginForm',
-  validate
+  validate,
+  enableReinitialize: true
 })(LoginForm);

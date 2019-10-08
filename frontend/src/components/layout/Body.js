@@ -1,13 +1,16 @@
 import React from 'react';
 
+import Content from './Content';
 import Footer from './Footer';
 import Header from './Header';
+import SideBar from './SideBar';
 
 const Body = ({ body }) => {
   return (
-    <div>
+    <div className="grid-container">
       <Header />
-      <div>{body}</div>
+      <SideBar />
+      <Content body={body}></Content>
       <Footer />
     </div>
   );

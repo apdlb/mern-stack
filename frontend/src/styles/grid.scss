@@ -1,0 +1,27 @@
+.grid-container {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr, 1fr;
+  grid-template-rows: repeat(3, auto);
+
+  grid-template-areas:
+    'header  header'
+    'sidebar content'
+    'footer  footer';
+}
+
+.grid-container .grid-header {
+  grid-area: header;
+}
+
+.grid-container .grid-sidebar {
+  grid-area: sidebar;
+}
+
+.grid-container .grid-content {
+  grid-area: content;
+}
+
+.grid-container .grid-footer {
+  grid-area: footer;
+}

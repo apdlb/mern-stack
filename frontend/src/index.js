@@ -1,5 +1,6 @@
 import './index.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/grid.scss';
+import 'antd/dist/antd.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
