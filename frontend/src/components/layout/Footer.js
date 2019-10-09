@@ -1,11 +1,8 @@
+import { Layout } from 'antd';
 import React from 'react';
 
 const Footer = () => {
-  return (
-    <footer className="grid-footer">
-      <h3>FOOTER</h3>
-    </footer>
-  );
+  return <Layout.Footer className="grid-footer">MERN Template ©2019 Created by Apaez</Layout.Footer>;
 };
 
 export default Footer;

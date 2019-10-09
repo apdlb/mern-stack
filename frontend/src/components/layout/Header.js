@@ -1,10 +1,20 @@
+import { Layout, Menu } from 'antd';
 import React from 'react';
+import { Translate } from 'react-localize-redux';
 
 const Header = () => {
   return (
-    <header className="grid-header">
-      <h3>HEADER</h3>
-    </header>
+    <Translate>
+      {({ translate }) => {
+        return (
+          <Layout.Header className="grid-header">
+            <Menu theme="dark" mode="horizontal" style={{ lineHeight: '64px' }}>
+              <Menu.Item key="1">Home</Menu.Item>
+            </Menu>
+          </Layout.Header>
+        );
+      }}
+    </Translate>
   );
 };
 

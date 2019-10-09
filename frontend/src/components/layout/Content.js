@@ -1,7 +1,8 @@
+import { Layout } from 'antd';
 import React from 'react';
 
 const Content = ({ body }) => {
-  return <main className="grid-content">{body}</main>;
+  return <Layout.Content className="grid-content">{body}</Layout.Content>;
 };
 
 export default Content;
