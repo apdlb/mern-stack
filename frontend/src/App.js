@@ -1,4 +1,4 @@
-import './styles/grid.scss';
+import './App.css';
 
 import React, { useEffect } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';

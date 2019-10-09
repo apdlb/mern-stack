@@ -7,7 +7,7 @@ services:
       - ./:/app/
       - .env.docker:/app/.env
     ports:
-      - 3000:3000
+      - 3002:3002
     entrypoint: /bin/sh
     command: -c "sleep 5 && npm run start:dev"
     depends_on:
