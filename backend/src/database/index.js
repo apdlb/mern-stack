@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+import Role from '../database/models/role';
+import User from '../database/models/user';
 import logger from '../utils/logger';
 
 // Conexión DB
@@ -27,6 +29,38 @@ mongoose.connect(dbString, { useNewUrlParser: true, useFindAndModify: false }, e
     process.exit(1);
   }
   logger.info('Connected to database.');
+
+  buildRoles().then(() => {
+    initialData();
+  });
 });
+
+const buildRoles = async () => {
+  return Role.findOne({}, (err, doc) => {
+    if (!doc) {
+      const roles = require('./seeds/roles.json');
+      for (const role of roles) {
+        const mRole = new Role(role);
+        mRole.save();
+      }
+    }
+  });
+};
+
+const initialData = async () => {
+  return User.findOne({}, async (err, doc) => {
+    if (!doc) {
+      const users = require('./seeds/users.json');
+      for (const user of users) {
+        if (user.role && user.role.name) {
+          const mRole = await Role.findOne({ name: user.role.name });
+          user.role = mRole;
+        }
+        const mUser = new User(user);
+        mUser.save();
+      }
+    }
+  });
+};
 
 export default mongoose;
