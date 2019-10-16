@@ -1,8 +1,9 @@
 import bcrypt from 'bcryptjs';
 import Boom from 'boom';
 
+import User from '../database/models/User';
+import * as baseService from './baseService';
 import * as jwtService from './jwtService';
-import * as userService from './userService';
 
 /**
  * Request new token.
@@ -24,7 +25,7 @@ export function login(email, password) {
  * @return {Promise}
  */
 export async function validateCredentials(email, password) {
-  const user = await userService.getUser({ email });
+  const user = await baseService.findOne(User, { conditions: { email } });
 
   if (!user) {
     throw Boom.notFound('This user is not registered in the system.');

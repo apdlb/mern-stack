@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
-import Role from '../database/models/role';
-import User from '../database/models/user';
+import Role from '../database/models/Role';
+import User from '../database/models/User';
 import logger from '../utils/logger';
 
 // Conexión DB

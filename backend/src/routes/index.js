@@ -2,9 +2,6 @@ import { Router } from 'express';
 
 import v1 from './v1';
 
-/**
- * Contiene todas las rutas para la API.
- */
 const router = Router();
 
 // Endpoint de presentación

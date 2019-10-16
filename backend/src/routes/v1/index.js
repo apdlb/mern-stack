@@ -1,11 +1,8 @@
 import { Router } from 'express';
 
 import auth from './auth';
-import users from './users';
+import entities from './entities';
 
-/**
- * Contiene todas las rutas para la API.
- */
 const router = Router();
 
 // Endpoint de presentación
@@ -17,6 +14,6 @@ router.get('/', (req, res) => {
 });
 
 router.use('/auth/token', auth);
-router.use('/users', users);
+router.use('/entities', entities);
 
 export default router;
