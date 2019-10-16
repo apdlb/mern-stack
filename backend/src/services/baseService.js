@@ -1,5 +1,5 @@
 /**
- * Find model
+ * Find models
  *
  * @param  {Object} model
  * @param  {Object} options
@@ -7,6 +7,17 @@
  */
 export function find(model, { filter, projection, options, callback }) {
   return model.find(filter, projection, options, callback);
+}
+
+/**
+ * Find models with pagination
+ *
+ * @param  {Object} model
+ * @param  {Object} options
+ * @return {Promise}
+ */
+export function paginate(model, { query, options, callback }) {
+  return model.paginate(query, options, callback);
 }
 
 /**

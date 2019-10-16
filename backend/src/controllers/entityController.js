@@ -1,3 +1,5 @@
+import Boom from 'boom';
+
 import Entity from '../database/models/Entity';
 import * as baseService from '../services/baseService';
 
@@ -10,10 +12,18 @@ import * as baseService from '../services/baseService';
  * @return {Promise}
  */
 export function findEntities(req, res, next) {
-  return baseService
-    .find(Entity, { filter: req.query })
-    .then(data => res.json({ data }))
-    .catch(err => next(err));
+  const { query = {} } = req;
+  const { page, limit, sort, ...filter } = query;
+
+  let call;
+  if (page && limit) {
+    const options = { page, limit, sort };
+    call = baseService.paginate(Entity, { filter, options });
+  } else {
+    call = baseService.find(Entity, { filter });
+  }
+
+  return call.then(data => res.json({ data })).catch(err => next(err));
 }
 
 /**
@@ -27,6 +37,13 @@ export function findEntities(req, res, next) {
 export function findEntity(req, res, next) {
   return baseService
     .findById(Entity, { id: req.params.idEntity })
+    .then(row => {
+      if (!row) {
+        throw Boom.notFound('Entity not found');
+      }
+
+      return row;
+    })
     .then(data => res.json({ data }))
     .catch(err => next(err));
 }

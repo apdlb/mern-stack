@@ -3,8 +3,8 @@ import Joi from '@hapi/joi';
 /**
  * Helper para la validación con Joi.
  *
- * @param  {object}  data
- * @param  {object}  schema
+ * @param  {Object}  data
+ * @param  {Object}  schema
  * @return {Promise}
  */
 function validate(data, schema) {

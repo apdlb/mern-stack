@@ -17,9 +17,9 @@ const SCHEMA_LOGIN = {
 /**
  * Validate login data.
  *
- * @param  {object}   req
- * @param  {object}   res
- * @param  {function} next
+ * @param  {Object}   req
+ * @param  {Object}   res
+ * @param  {Function} next
  * @return {Promise}
  */
 export function loginValidator(req, res, next) {
