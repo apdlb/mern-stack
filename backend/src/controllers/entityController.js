@@ -13,11 +13,14 @@ import * as baseService from '../services/baseService';
  */
 export function findEntities(req, res, next) {
   const { query = {} } = req;
-  const { page, limit, sort, ...filter } = query;
+  const { page, pageSize, sort, order, ...filter } = query;
 
   let call;
-  if (page && limit) {
-    const options = { page, limit, sort };
+  if (page && pageSize) {
+    const options = { page, limit: pageSize };
+    if (sort && order) {
+      options.sort = { [sort]: order };
+    }
     call = baseService.paginate(Entity, { filter, options });
   } else {
     call = baseService.find(Entity, { filter });
