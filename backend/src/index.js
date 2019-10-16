@@ -7,7 +7,6 @@ import path from 'path';
 
 import * as errorHandler from './middleware/errorHandler';
 import json from './middleware/json';
-import routes from './routes';
 import logger from './utils/logger';
 
 require('./utils/env');
@@ -35,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(errorHandler.bodyParser);
 app.use(json);
 
-app.use('/api', routes);
+app.use('/api', require('./routes').default);
 
 // Error Middlewares
 app.use(errorHandler.genericErrorHandler);

@@ -1,24 +1,23 @@
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
-import { getUser } from '../services/userService';
+import User from '../database/models/User';
+import { findById } from '../services/baseService';
+import CONSTANTS from '../utils/constants';
 import logger from '../utils/logger';
-
-// Encryption key for JWT
-const secret = process.env.JWT_ENCRYPTION;
 
 module.exports = function(passport) {
   passport.serializeUser(function(user, done) {
     done(null, user.id);
   });
 
-  let opts = {};
-
+  const opts = {};
   opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-  opts.secretOrKey = secret;
+  opts.secretOrKey = process.env.JWT_ENCRYPTION;
 
   passport.use(
+    CONSTANTS.PASSPORT_USER,
     new Strategy(opts, (jwtPayload, done) => {
-      return getUser({ _id: jwtPayload.id })
+      return findById(User, { id: jwtPayload.id })
         .then(user => {
           if (user) {
             done(null, user);
