@@ -6,6 +6,11 @@
  * @return {Promise}
  */
 export function find(model, { filter, projection, options, callback }) {
+  // Default sort
+  if (options && !options.sort) {
+    options.sort = { _id: -1 };
+  }
+
   return model.find(filter, projection, options, callback);
 }
 
@@ -17,6 +22,11 @@ export function find(model, { filter, projection, options, callback }) {
  * @return {Promise}
  */
 export function paginate(model, { query, options, callback }) {
+  // Default sort
+  if (options && !options.sort) {
+    options.sort = { _id: -1 };
+  }
+
   return model.paginate(query, options, callback);
 }
 

@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import Role from '../database/models/Role';
 import User from '../database/models/User';
 import logger from '../utils/logger';
+import Entity from './models/Entity';
 
 // Conexión DB
 let dbString = 'mongodb://';
@@ -60,6 +61,16 @@ const initialData = async () => {
         mUser.save();
       }
     }
+  }).then(() => {
+    return Entity.findOne({}, (err, doc) => {
+      if (!doc) {
+        const entities = require('./seeds/entities.json');
+        for (const entity of entities) {
+          const mEntity = new Entity(entity);
+          mEntity.save();
+        }
+      }
+    });
   });
 };
 

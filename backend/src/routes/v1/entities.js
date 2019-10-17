@@ -11,7 +11,7 @@ passportMiddleware(passport);
 const router = Router();
 
 // GET /api/v1/entities
-router.get('/', passport.authenticate([CONSTANTS.PASSPORT_USER], { session: false }), entityController.findEntities);
+router.get('/', entityController.findEntities);
 
 // POST /api/v1/entities
 router.post(

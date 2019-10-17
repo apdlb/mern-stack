@@ -12,9 +12,7 @@ export function generate(user) {
     id: user._id,
     email: user.email,
     iat: moment().unix(), // Creation date
-    exp: moment()
-      .add(process.env.JWT_EXPIRATION, 'seconds')
-      .unix() // Expiration date
+    exp: Math.floor(Date.now() / 1000) + Number(process.env.JWT_EXPIRATION) // Expiration
   };
 
   const token = jwt.sign(payload, process.env.JWT_ENCRYPTION);

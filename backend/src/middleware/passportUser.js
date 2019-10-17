@@ -23,12 +23,10 @@ module.exports = function(passport) {
             done(null, user);
           } else {
             // If user doesn't exists return 401 Unauthorized
-            console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
             done(null, false);
           }
         })
         .catch(err => {
-          console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
           logger.info(err);
           done(null, false);
         });

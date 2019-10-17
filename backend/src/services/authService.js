@@ -32,7 +32,7 @@ export async function validateCredentials(email, password) {
   }
 
   if (!bcrypt.compareSync(password, user.password)) {
-    throw Boom.unauthorized('Invalid password');
+    throw Boom.badRequest('Invalid password');
   }
 
   return user;

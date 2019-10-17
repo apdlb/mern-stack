@@ -15,15 +15,25 @@ export function findEntities(req, res, next) {
   const { query = {} } = req;
   const { page, pageSize, sort, order, ...filter } = query;
 
+  const customFilter = filter;
+  // Like operator
+  if (customFilter.field1) {
+    customFilter.field1 = { $regex: `.*${filter.field1}.*` };
+  }
+
+  const options = {};
+  if (sort && order) {
+    options.sort = { [sort]: order };
+  }
+
   let call;
   if (page && pageSize) {
-    const options = { page, limit: pageSize };
-    if (sort && order) {
-      options.sort = { [sort]: order };
-    }
-    call = baseService.paginate(Entity, { filter, options });
+    options.page = page;
+    options.limit = pageSize;
+
+    call = baseService.paginate(Entity, { query: customFilter, options });
   } else {
-    call = baseService.find(Entity, { filter });
+    call = baseService.find(Entity, { filter: customFilter, options });
   }
 
   return call.then(data => res.json({ data })).catch(err => next(err));
