@@ -11,7 +11,7 @@ passportMiddleware(passport);
 const router = Router();
 
 // GET /api/v1/entities
-router.get('/', entityController.findEntities);
+router.get('/', passport.authenticate([CONSTANTS.PASSPORT_USER], { session: false }), entityController.findEntities);
 
 // POST /api/v1/entities
 router.post(
@@ -33,7 +33,7 @@ router.patch(
 );
 
 // DELETE /api/v1/entities/:idEntity
-router.get(
+router.delete(
   '/:idEntity',
   passport.authenticate([CONSTANTS.PASSPORT_USER], { session: false }),
   entityValidator.findEntity,
