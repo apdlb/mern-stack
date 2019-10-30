@@ -60,7 +60,15 @@ export function findOne(model, { conditions, projection, options, callback }) {
  * @return {Promise}
  */
 export function create(model, { docs, options, callback }) {
-  return model.create(docs, options, callback);
+  if (docs && options && callback) {
+    return model.create(docs, options, callback);
+  } else if (docs && options && !callback) {
+    return model.create(docs, options);
+  } else if (docs && !options && callback) {
+    return model.create(docs, callback);
+  } else {
+    return model.create(docs);
+  }
 }
 
 /**
