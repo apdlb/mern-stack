@@ -10,10 +10,10 @@ passportMiddleware(passport);
 
 const router = Router();
 
+// POST /api/v1/auth/login
+router.post('/login', authValidator.loginValidator, authController.login);
+
 // GET /api/v1/auth
 router.get('/', passport.authenticate([CONSTANTS.PASSPORT_USER], { session: false }), authController.getInfo);
-
-// POST /api/v1/auth/token
-router.post('/', authValidator.loginValidator, authController.login);
 
 export default router;

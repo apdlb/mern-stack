@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
   });
 });
 
-router.use('/auth/token', auth);
+router.use('/auth', auth);
 router.use('/entities', entities);
 
 export default router;
