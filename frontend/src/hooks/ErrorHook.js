@@ -1,9 +1,8 @@
 import { getTranslate } from 'react-localize-redux';
 import { useStore } from 'react-redux';
-import Swal from 'sweetalert2';
 
 const renderErrorBody = (message, details) => {
-  let body = '';
+  let body = "";
 
   if (details && details instanceof Array) {
     for (const error of details) {
@@ -35,11 +34,7 @@ const useError = () => {
         // TODO logout
       }
     } else if (code === 400 || code === 404) {
-      Swal.fire({
-        type: 'error',
-        title: translate('generic.error'),
-        html: renderErrorBody(message, details)
-      });
+      // Mostar modal
     } else {
       // TODO error generico
     }

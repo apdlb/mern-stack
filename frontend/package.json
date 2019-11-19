@@ -16,8 +16,7 @@
     "redux-form": "^8.2.6",
     "redux-persist": "^6.0.0",
     "redux-promise": "^0.6.0",
-    "redux-thunk": "^2.3.0",
-    "sweetalert2": "^9.3.12"
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
