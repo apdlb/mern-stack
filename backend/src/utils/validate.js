@@ -8,13 +8,13 @@ import Joi from '@hapi/joi';
  * @return {Promise}
  */
 function validate(data, schema) {
-  return Joi.validate(data, schema, { abortEarly: false }, err => {
-    if (err) {
-      return Promise.reject(err);
-    }
+  const { error } = Joi.object(schema).validate(data);
 
-    return Promise.resolve(null);
-  });
+  if (error) {
+    return Promise.reject(error);
+  }
+
+  return Promise.resolve(null);
 }
 
 export default validate;

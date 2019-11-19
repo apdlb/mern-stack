@@ -1,0 +1,28 @@
+.grid-login-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, auto);
+
+  grid-template-areas:
+    'inputs'
+    'buttons';
+
+  max-width: 300px;
+
+  &-inputs {
+    grid-area: inputs;
+
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-rows: 1fr;
+  }
+
+  &-buttons {
+    grid-area: buttons;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

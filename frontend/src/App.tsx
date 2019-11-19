@@ -1,15 +1,18 @@
 import './App.css';
 
+import { Layout } from 'antd';
 import React, { useEffect } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { addTranslation, initialize, withLocalize } from 'react-localize-redux';
+import { addTranslation, initialize } from 'react-localize-redux';
 import { useDispatch } from 'react-redux';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
-import CONSTANTS from './constants';
-import Login from './containers/auth/Login';
+import Message from './components/shared/Message';
+import Routers from './routers';
+import CONSTANTS from './utils/constants';
 
-const App = () => {
+interface Props {}
+
+const App: React.FC<Props> = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,7 +22,7 @@ const App = () => {
           languages: CONSTANTS.AVAILABLE_LANGUAGES,
           options: {
             renderToStaticMarkup,
-            defaultLanguage: localStorage.getItem('preferedLanguage'),
+            defaultLanguage: localStorage.getItem('preferedLanguage') || undefined,
             onMissingTranslation: () => ''
           }
         })
@@ -42,14 +45,13 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={Login} />
-
-        <Route path="/" render={() => <Redirect to="/" />} />
-      </Switch>
-    </BrowserRouter>
+    <>
+      <Layout className="grid-container">
+        <Message />
+        <Routers />
+      </Layout>
+    </>
   );
 };
 
-export default withLocalize(App);
+export default App;

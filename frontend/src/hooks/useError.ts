@@ -1,10 +1,12 @@
 import { getTranslate } from 'react-localize-redux';
 import { useStore } from 'react-redux';
 
-const renderErrorBody = (message, details) => {
-  let body = "";
+import { IDetailError, IError } from '../interfaces';
 
-  if (details && details instanceof Array) {
+const renderErrorBody = (message: string = '', details?: IDetailError[]): string => {
+  let body = '';
+
+  if (details && details.length) {
     for (const error of details) {
       body += `- ${error.message}<br>`;
     }
@@ -20,7 +22,7 @@ const useError = () => {
   const props = store.getState();
   const translate = getTranslate(props.localize);
 
-  const errorControl = (err, redirect) => {
+  const errorControl = (err: IError, redirect: boolean) => {
     let code, details, message;
 
     code = err.code;

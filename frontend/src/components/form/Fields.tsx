@@ -4,7 +4,7 @@ import { Translate } from 'react-localize-redux';
 
 const formItemLayout = {};
 
-const makeField = Component => props => {
+const makeField = (Component: any) => (props: any) => {
   const { input, meta, children, hasFeedback, label, ...rest } = props;
   const hasError = meta.touched && meta.invalid;
 

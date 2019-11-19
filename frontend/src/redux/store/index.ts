@@ -7,12 +7,18 @@ import ReduxThunk from 'redux-thunk';
 
 import reducers from '../reducers';
 
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
+  }
+}
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const persistConfig = {
   key: 'root',
   storage: storage,
-  blacklist: ['form', 'modal'],
+  blacklist: ['form'],
   stateReconciler: autoMergeLevel2 // see "Merge Process" section for details.
 };
 

@@ -8,4 +8,4 @@ export default combineReducers({
   form: formReducer,
   localize: localizeReducer,
   auth
-});
+} as any);

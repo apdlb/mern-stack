@@ -7,8 +7,8 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 
 import App from './App';
+import { persistor, store } from './redux/store';
 import * as serviceWorker from './serviceWorker';
-import { persistor, store } from './store';
 
 const rootComponent = (
   <Provider store={store}>
@@ -19,7 +19,7 @@ const rootComponent = (
     </PersistGate>
   </Provider>
 );
-ReactDOM.render(rootComponent, document.getElementById('root'));
+ReactDOM.render(rootComponent, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
