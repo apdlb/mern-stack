@@ -1,5 +1,7 @@
 {
   "validations": {
-    "required": ["Field is required", "El campo es obligatorio"]
+    "number": ["Field '${input}' must be a number", "El campo '${input}' debe ser un número"],
+    "required": ["Field '${input}' is required", "El campo '${input}' es obligatorio"],
+    "email": ["Must be a valid email", "Debe ser un email valido"]
   }
 }

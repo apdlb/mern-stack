@@ -18,7 +18,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const persistConfig = {
   key: 'root',
   storage: storage,
-  blacklist: ['form'],
+  blacklist: [],
   stateReconciler: autoMergeLevel2 // see "Merge Process" section for details.
 };
 
