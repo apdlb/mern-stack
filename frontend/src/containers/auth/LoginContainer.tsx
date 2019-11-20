@@ -13,7 +13,7 @@ import { login, logout } from '../../redux/actions/AuthActions';
 interface MatchParams {}
 interface Props extends RouteComponentProps<MatchParams>, FormComponentProps {}
 
-const Login: React.FC<Props> = props => {
+const LoginContainer: React.FC<Props> = props => {
   const { form } = props;
   const dispatch = useDispatch();
 
@@ -26,8 +26,14 @@ const Login: React.FC<Props> = props => {
     // eslint-disable-next-line
   }, []);
 
-  const onSubmit = (values: any) => {
-    dispatch(login(values));
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    form.validateFields((err: any, values: any) => {
+      if (!err) {
+        dispatch(login(values));
+      }
+    });
   };
 
   return (
@@ -37,6 +43,6 @@ const Login: React.FC<Props> = props => {
   );
 };
 
-const WrappedLogin = Form.create<Props>({ name: 'login' })(Login);
+const WrappedLoginContainer = Form.create<Props>({ name: 'loginForm' })(LoginContainer);
 
-export default withRouter(memo(WrappedLogin));
+export default withRouter(memo(WrappedLoginContainer));

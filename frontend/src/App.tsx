@@ -40,7 +40,9 @@ const App: React.FC<Props> = () => {
     }
     dispatch(addTranslation(require('./locales/generic.json')));
     dispatch(addTranslation(require('./locales/validations.json')));
+    dispatch(addTranslation(require('./locales/nav.json')));
     dispatch(addTranslation(require('./locales/auth.json')));
+    dispatch(addTranslation(require('./locales/entities.json')));
   }, [dispatch]);
 
   return (
