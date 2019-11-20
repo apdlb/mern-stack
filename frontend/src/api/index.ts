@@ -1,29 +1,8 @@
+import { message } from 'antd';
 import HttpStatus from 'http-status-codes';
 import _ from 'lodash';
 
-import { IApiFetch } from '../interfaces';
-
-function urlWithParams(url: string, params?: string | string[]) {
-  if (params) {
-    const urlParams = url.match(/{param}/g) || [];
-    if (params instanceof Array) {
-      params.forEach((value, index) => {
-        if (index < _.size(urlParams)) {
-          url = _.replace(url, '{param}', value);
-        } else {
-          url = `${url}/${value}`;
-        }
-      });
-    } else {
-      if (_.size(urlParams)) {
-        url = _.replace(url, '{param}', params);
-      } else {
-        url = `${url}/${params}`;
-      }
-    }
-  }
-  return url;
-}
+import { IApiFetch, IError } from '../interfaces';
 
 export const apiFetch = ({ method, url, body, params, file = false, formData }: IApiFetch): Promise<any> => {
   const headers = {} as any;
@@ -57,8 +36,44 @@ export const apiFetch = ({ method, url, body, params, file = false, formData }: 
     })
     .then(r => {
       if (r.error) {
+        showErrorMessages(r.error);
+
         return Promise.reject(r.error);
       }
       return (r = r.data);
     });
+};
+
+const urlWithParams = (url: string, params?: string | string[]) => {
+  if (params) {
+    const urlParams = url.match(/{param}/g) || [];
+    if (params instanceof Array) {
+      params.forEach((value, index) => {
+        if (index < _.size(urlParams)) {
+          url = _.replace(url, '{param}', value);
+        } else {
+          url = `${url}/${value}`;
+        }
+      });
+    } else {
+      if (_.size(urlParams)) {
+        url = _.replace(url, '{param}', params);
+      } else {
+        url = `${url}/${params}`;
+      }
+    }
+  }
+  return url;
+};
+
+const showErrorMessages = (error: IError): void => {
+  if (error?.details?.length) {
+    for (const detail of error.details) {
+      message.error(detail?.message);
+    }
+  } else if (error?.message) {
+    message.error(error.message);
+  } else {
+    message.error('An error has occurred');
+  }
 };

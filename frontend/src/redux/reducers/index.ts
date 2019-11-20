@@ -4,8 +4,10 @@ import { reducer as formReducer } from 'redux-form';
 
 import { auth } from './auth';
 
-export default combineReducers({
+const reducer = combineReducers({
   form: formReducer,
   localize: localizeReducer,
   auth
 } as any);
+
+export default reducer;

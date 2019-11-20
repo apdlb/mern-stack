@@ -1,12 +1,32 @@
+import { message } from 'antd';
 import React, { memo } from 'react';
-import { connect } from 'react-redux';
+import { Translate } from 'react-localize-redux';
 
-interface Props {}
+import { IError } from '../../interfaces';
 
-const Message: React.FC<Props> = () => {
-  return <>Hola</>;
+interface Props {
+  error: IError;
+}
+
+const Message: React.FC<Props> = props => {
+  const { error } = props;
+
+  if (error?.details?.length) {
+    for (const detail of error.details) {
+      message.error(detail?.message);
+    }
+  } else {
+    message.error(error?.message);
+  }
+
+  return (
+    <Translate>
+      {({ translate }) => {
+        console.log(translate);
+        return <>{translate('auth.labels.email')}</>;
+      }}
+    </Translate>
+  );
 };
 
-const mapStateToProps = (state: any) => ({});
-
-export default connect(mapStateToProps, {})(memo(Message));
+export default memo(Message);

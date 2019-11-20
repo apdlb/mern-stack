@@ -6,7 +6,6 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { addTranslation, initialize } from 'react-localize-redux';
 import { useDispatch } from 'react-redux';
 
-import Message from './components/shared/Message';
 import Routers from './routers';
 import CONSTANTS from './utils/constants';
 
@@ -47,7 +46,6 @@ const App: React.FC<Props> = () => {
   return (
     <>
       <Layout className="grid-container">
-        <Message />
         <Routers />
       </Layout>
     </>

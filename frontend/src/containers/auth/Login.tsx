@@ -12,10 +12,8 @@ interface Props {}
 const Login: React.FC<Props> = () => {
   const dispatch = useDispatch();
 
-  const onSubmit = async (values: any) => {
-    const res = await dispatch(login(values));
-    const res2 = await res.payload;
-    console.log(res, res2);
+  const onSubmit = (values: any) => {
+    dispatch(login(values));
   };
 
   const initialValues = {};
