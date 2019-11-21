@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import LoginForm from '../../components/auth/LoginForm';
-import Content from '../../components/layout/Content';
+import Content from '../../components/shared/layout/Content';
 import { login, logout } from '../../redux/actions/AuthActions';
 
 interface MatchParams {}

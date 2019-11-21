@@ -4,8 +4,8 @@ import { Translate } from 'react-localize-redux';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 
-import { logout } from '../../redux/actions/AuthActions';
-import PATHS from '../../utils/paths';
+import { logout } from '../../../redux/actions/AuthActions';
+import PATHS from '../../../utils/paths';
 
 interface Props {}
 

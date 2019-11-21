@@ -2,8 +2,8 @@ import React, { memo } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Route, RouteProps } from 'react-router';
 
-import Footer from '../components/layout/Footer';
-import Header from '../components/layout/Header';
+import Footer from '../components/shared/layout/Footer';
+import Header from '../components/shared/layout/Header';
 import useAuth from '../hooks/useAuth';
 import PATHS from '../utils/paths';
 

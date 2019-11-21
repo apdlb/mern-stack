@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import Home from '../../components/home/Home';
-import Content from '../../components/layout/Content';
+import Content from '../../components/shared/layout/Content';
 
 interface MatchParams {}
 interface Props extends RouteComponentProps<MatchParams> {}
