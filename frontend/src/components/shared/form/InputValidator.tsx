@@ -15,7 +15,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const InputValidator: React.FunctionComponent<Props> = props => {
+const InputValidator: React.FC<Props> = props => {
   const { form, field, valuePropName = 'value', label, initialValue, rules = [], validations, children } = props;
   const validators = useValidators();
   const { getFieldDecorator } = form;

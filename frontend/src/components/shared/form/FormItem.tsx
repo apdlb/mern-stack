@@ -18,7 +18,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const FormItem: React.FunctionComponent<Props> = props => {
+const FormItem: React.FC<Props> = props => {
   const { form, className, field, valuePropName, label, initialValue, rules, validations, formItemProps, children } = props;
 
   return (

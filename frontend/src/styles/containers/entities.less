@@ -1,0 +1,43 @@
+.grid-entities-filter-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, auto);
+
+  grid-template-areas:
+    'inputs'
+    'buttons';
+
+  &-inputs {
+    grid-area: inputs;
+
+    display: grid;
+    gap: 100px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
+
+    padding: 0 50px;
+  }
+
+  &-buttons {
+    grid-area: buttons;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-entities-filter-form {
+    &-inputs {
+      grid-area: inputs;
+
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1fr;
+      grid-auto-rows: 1fr;
+
+      padding: 0 25px;
+    }
+  }
+}

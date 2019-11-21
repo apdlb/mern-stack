@@ -8,7 +8,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import LoginForm from '../../components/auth/LoginForm';
 import Content from '../../components/shared/layout/Content';
-import { login, logout } from '../../redux/actions/AuthActions';
+import { login, logout } from '../../redux/actions/authActions';
 
 interface MatchParams {}
 interface Props extends RouteComponentProps<MatchParams>, FormComponentProps {}
