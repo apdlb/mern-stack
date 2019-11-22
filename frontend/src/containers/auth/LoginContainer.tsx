@@ -1,4 +1,4 @@
-import '../../styles/pages/login.less';
+import '../../styles/containers/login.less';
 
 import { Form } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
