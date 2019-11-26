@@ -1,7 +1,9 @@
 import Joi from '@hapi/joi';
 import Boom from 'boom';
+import { NextFunction, Request, Response } from 'express';
 
 import Entity from '../database/models/Entity';
+import { IEntity } from '../interfaces/models';
 import * as baseService from '../services/baseService';
 import validate from '../utils/validate';
 
@@ -17,7 +19,7 @@ const SCHEMA_CREATE_ENTITY = {
   field3: Joi.boolean()
     .label('field3')
     .optional()
-};
+} as any;
 
 const SCHEMA_UPDATE_ENTITY = SCHEMA_CREATE_ENTITY;
 
@@ -29,12 +31,12 @@ const SCHEMA_UPDATE_ENTITY = SCHEMA_CREATE_ENTITY;
  * @param  {Function} next
  * @return {Promise}
  */
-export function createEntityValidator(req, res, next) {
+export function createEntityValidator(req: Request, res: Response, next: NextFunction) {
   const { body } = req;
 
   return validate(body, SCHEMA_CREATE_ENTITY)
     .then(() => next())
-    .catch(err => next(err));
+    .catch((err: any) => next(err));
 }
 
 /**
@@ -45,8 +47,8 @@ export function createEntityValidator(req, res, next) {
  * @param  {Function} next
  * @return {Promise}
  */
-export function findEntity(req, res, next) {
-  return baseService.findById(Entity, { id: req.params.idEntity }).then(row => {
+export function findEntity(req: Request, res: Response, next: NextFunction) {
+  return baseService.findById(Entity, { id: req.params.idEntity }).then((row: IEntity) => {
     if (!row) {
       return next(Boom.notFound('Entity not found'));
     }
@@ -63,10 +65,10 @@ export function findEntity(req, res, next) {
  * @param  {Function} next
  * @return {Promise}
  */
-export function updateEntityValidator(req, res, next) {
+export function updateEntityValidator(req: Request, res: Response, next: NextFunction) {
   const { body } = req;
 
   return validate(body, SCHEMA_UPDATE_ENTITY)
     .then(() => next())
-    .catch(err => next(err));
+    .catch((err: any) => next(err));
 }

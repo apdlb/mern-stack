@@ -12,7 +12,7 @@ import * as jwtService from './jwtService';
  * @param  {String} password
  * @return {Promise}
  */
-export function login(email, password) {
+export function login(email: string, password: string) {
   // Si las credenciales son válidas génera el token JWT
   return validateCredentials(email, password).then(user => jwtService.generate(user));
 }
@@ -24,7 +24,7 @@ export function login(email, password) {
  * @param  {String} password
  * @return {Promise}
  */
-export async function validateCredentials(email, password) {
+export async function validateCredentials(email: string, password: string) {
   const user = await baseService.findOne(User, { conditions: { email } });
 
   if (!user) {

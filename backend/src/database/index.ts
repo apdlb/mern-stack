@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 
-import Role from '../database/models/Role';
-import User from '../database/models/User';
 import logger from '../utils/logger';
 import Entity from './models/Entity';
+import Role from './models/Role';
+import User from './models/User';
 
 // Conexión DB
 let dbString = 'mongodb://';
@@ -24,7 +24,7 @@ if (process.env.DB_NAME) {
   dbString = `${dbString}/${process.env.DB_NAME}`;
 }
 
-mongoose.connect(dbString, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true }, err => {
+mongoose.connect(dbString, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true }, (err: any) => {
   if (err) {
     logger.error('Unable to connect to database:' + err);
     process.exit(1);

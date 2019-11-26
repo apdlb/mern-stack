@@ -1,16 +1,18 @@
+import { PassportStatic } from 'passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
 import User from '../database/models/User';
+import { ITokenPayload } from '../interfaces';
 import { findById } from '../services/baseService';
 import CONSTANTS from '../utils/constants';
 import logger from '../utils/logger';
 
-module.exports = function(passport) {
-  passport.serializeUser(function(user, done) {
+export default function(passport: PassportStatic) {
+  passport.serializeUser(function(user: ITokenPayload, done) {
     done(null, user.id);
   });
 
-  const opts = {};
+  const opts = {} as any;
   opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
   opts.secretOrKey = process.env.JWT_ENCRYPTION;
 
@@ -26,10 +28,10 @@ module.exports = function(passport) {
             done(null, false);
           }
         })
-        .catch(err => {
+        .catch((err: any) => {
           logger.info(err);
           done(null, false);
         });
     })
   );
-};
+}

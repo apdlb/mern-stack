@@ -1,3 +1,4 @@
+import { NextFunction, Request, Response } from 'express';
 import HttpStatus from 'http-status-codes';
 
 import buildError from '../utils/buildError';
@@ -9,7 +10,7 @@ import logger from '../utils/logger';
  * @param {Object} req
  * @param {Object} res
  */
-export function notFound(req, res) {
+export function notFound(req: Request, res: Response) {
   res.status(HttpStatus.NOT_FOUND).json({
     error: {
       code: HttpStatus.NOT_FOUND,
@@ -24,7 +25,7 @@ export function notFound(req, res) {
  * @param {Object} req
  * @param {Object} res
  */
-export function methodNotAllowed(req, res) {
+export function methodNotAllowed(req: Request, res: Response) {
   res.status(HttpStatus.METHOD_NOT_ALLOWED).json({
     error: {
       code: HttpStatus.METHOD_NOT_ALLOWED,
@@ -42,7 +43,7 @@ export function methodNotAllowed(req, res) {
  * @param  {Object}   res
  * @param  {Function} next
  */
-export function bodyParser(err, req, res, next) {
+export function bodyParser(err: any, req: Request, res: Response, next: NextFunction) {
   logger.error(err);
 
   res.status(err.status).json({
@@ -61,7 +62,7 @@ export function bodyParser(err, req, res, next) {
  * @param  {Object}   res
  * @param  {Function} next
  */
-export function genericErrorHandler(err, req, res, next) {
+export function genericErrorHandler(err: any, req: Request, res: Response, next: NextFunction) {
   logger.error(err);
 
   let error = buildError(err);

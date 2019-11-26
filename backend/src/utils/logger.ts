@@ -1,9 +1,8 @@
-import 'winston-daily-rotate-file';
-
 import fs from 'fs';
 import winston from 'winston';
+import DailyRotateFile from 'winston-daily-rotate-file';
 
-const tsFormat = () => new Date().toISOString();
+const tsFormat = new Date().toISOString();
 const logDir = process.env.LOGGING_DIR || 'logs';
 const logLevel = process.env.LOGGING_LEVEL || 'info';
 
@@ -30,7 +29,7 @@ const logger = winston.createLogger({
       level: 'info',
       format: winston.format.combine(winston.format.colorize(), winston.format.timestamp({ format: tsFormat }), myFormat)
     }),
-    new winston.transports.DailyRotateFile({
+    new DailyRotateFile({
       filename: `${logDir}/%DATE%-debug.log`,
       datePattern: 'YYYY-MM-DD',
       level: logLevel,

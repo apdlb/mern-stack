@@ -1,4 +1,5 @@
 import Boom from 'boom';
+import { NextFunction, Request, Response } from 'express';
 import _ from 'lodash';
 
 /**
@@ -8,7 +9,7 @@ import _ from 'lodash';
  * @param  {Object}   res
  * @param  {Function} next
  */
-export default function json(req, res, next) {
+export default function json(req: Request, res: Response, next: NextFunction) {
   const { body, method } = req;
   const disallowedHttpHeaders = ['POST', 'PUT'];
 

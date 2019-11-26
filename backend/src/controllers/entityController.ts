@@ -1,4 +1,6 @@
 import Boom from 'boom';
+import { NextFunction, Request, Response } from 'express';
+import { DocumentQuery } from 'mongoose';
 
 import Entity from '../database/models/Entity';
 import * as baseService from '../services/baseService';
@@ -11,7 +13,7 @@ import * as baseService from '../services/baseService';
  * @param  {Function} next
  * @return {Promise}
  */
-export function findEntities(req, res, next) {
+export function findEntities(req: Request, res: Response, next: NextFunction) {
   const { query = {} } = req;
   const { page, pageSize, sort, order, ...filter } = query;
 
@@ -21,12 +23,12 @@ export function findEntities(req, res, next) {
     customFilter.field1 = { $regex: `.*${filter.field1}.*` };
   }
 
-  const options = {};
+  const options = {} as any;
   if (sort && order) {
     options.sort = { [sort]: order };
   }
 
-  let call;
+  let call: Promise<any> | DocumentQuery<any[], any>;
   if (page && pageSize) {
     options.page = page;
     options.limit = pageSize;
@@ -36,7 +38,7 @@ export function findEntities(req, res, next) {
     call = baseService.find(Entity, { filter: customFilter, options });
   }
 
-  return call.then(data => res.json({ data })).catch(err => next(err));
+  return call;
 }
 
 /**
@@ -47,7 +49,7 @@ export function findEntities(req, res, next) {
  * @param  {Function} next
  * @return {Promise}
  */
-export function findEntity(req, res, next) {
+export function findEntity(req: Request, res: Response, next: NextFunction) {
   return baseService
     .findById(Entity, { id: req.params.idEntity })
     .then(row => {
@@ -58,7 +60,7 @@ export function findEntity(req, res, next) {
       return row;
     })
     .then(data => res.json({ data }))
-    .catch(err => next(err));
+    .catch((err: any) => next(err));
 }
 
 /**
@@ -69,13 +71,13 @@ export function findEntity(req, res, next) {
  * @param  {Function} next
  * @return {Promise}
  */
-export function createEntity(req, res, next) {
+export function createEntity(req: Request, res: Response, next: NextFunction) {
   const { body } = req;
 
   return baseService
     .create(Entity, { docs: body })
     .then(data => res.json({ data }))
-    .catch(err => next(err));
+    .catch((err: any) => next(err));
 }
 
 /**
@@ -86,13 +88,13 @@ export function createEntity(req, res, next) {
  * @param  {Function} next
  * @return {Promise}
  */
-export function updateEntity(req, res, next) {
+export function updateEntity(req: Request, res: Response, next: NextFunction) {
   const { params, body } = req;
 
   return baseService
     .findByIdAndUpdate(Entity, { id: params.idEntity, update: body })
     .then(data => res.json({ data }))
-    .catch(err => next(err));
+    .catch((err: any) => next(err));
 }
 
 /**
@@ -103,9 +105,9 @@ export function updateEntity(req, res, next) {
  * @param  {Function} next
  * @return {Promise}
  */
-export function deleteEntity(req, res, next) {
+export function deleteEntity(req: Request, res: Response, next: NextFunction) {
   return baseService
     .findByIdAndDelete(Entity, { id: req.params.idEntity })
     .then(data => res.json({ data }))
-    .catch(err => next(err));
+    .catch((err: any) => next(err));
 }

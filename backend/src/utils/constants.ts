@@ -1,4 +1,4 @@
-const CONSTANTS = {};
+const CONSTANTS = {} as any;
 
 CONSTANTS.PASSPORT_USER = 'user';
 

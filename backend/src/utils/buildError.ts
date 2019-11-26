@@ -6,7 +6,7 @@ import HttpStatus from 'http-status-codes';
  * @param  {Error} err
  * @return {Object}
  */
-function buildError(err) {
+function buildError(err: any) {
   // Errores de validation (Joi)
   if (err.isJoi) {
     return {
@@ -14,7 +14,7 @@ function buildError(err) {
       message: HttpStatus.getStatusText(HttpStatus.BAD_REQUEST),
       details:
         err.details &&
-        err.details.map(err => {
+        err.details.map((err: any) => {
           return {
             message: err.message,
             param: err.path.join('.')

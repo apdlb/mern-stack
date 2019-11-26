@@ -1,4 +1,5 @@
 import Joi from '@hapi/joi';
+import { NextFunction, Request, Response } from 'express';
 
 import validate from '../utils/validate';
 
@@ -12,7 +13,7 @@ const SCHEMA_LOGIN = {
     .label('password')
     .trim()
     .required()
-};
+} as any;
 
 /**
  * Validate login data.
@@ -22,10 +23,10 @@ const SCHEMA_LOGIN = {
  * @param  {Function} next
  * @return {Promise}
  */
-export function loginValidator(req, res, next) {
+export function loginValidator(req: Request, res: Response, next: NextFunction) {
   const { body } = req;
 
   return validate(body, SCHEMA_LOGIN)
     .then(() => next())
-    .catch(err => next(err));
+    .catch((err: any) => next(err));
 }
