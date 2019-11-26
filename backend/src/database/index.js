@@ -24,7 +24,7 @@ if (process.env.DB_NAME) {
   dbString = `${dbString}/${process.env.DB_NAME}`;
 }
 
-mongoose.connect(dbString, { useNewUrlParser: true, useFindAndModify: false }, err => {
+mongoose.connect(dbString, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true }, err => {
   if (err) {
     logger.error('Unable to connect to database:' + err);
     process.exit(1);
