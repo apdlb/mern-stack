@@ -28,17 +28,20 @@ export function findEntities(req: Request, res: Response, next: NextFunction) {
     options.sort = { [sort]: order };
   }
 
-  let call: Promise<any> | DocumentQuery<any[], any>;
   if (page && pageSize) {
     options.page = page;
     options.limit = pageSize;
 
-    call = baseService.paginate(Entity, { query: customFilter, options });
+    return baseService
+      .paginate(Entity, { query: customFilter, options })
+      .then((data: any) => res.json({ data }))
+      .catch((err: any) => next(err));
   } else {
-    call = baseService.find(Entity, { filter: customFilter, options });
+    return baseService
+      .find(Entity, { filter: customFilter, options })
+      .then((data: any) => res.json({ data }))
+      .catch((err: any) => next(err));
   }
-
-  return call;
 }
 
 /**
