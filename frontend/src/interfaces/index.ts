@@ -1,11 +1,12 @@
 import { PaginationConfig } from 'antd/lib/table';
+import { Method } from 'axios';
 
 export interface IMetadataObj {
   [key: string]: any;
 }
 
 export interface IApiFetch {
-  method: string;
+  method: Method;
   url: string;
   body?: object;
   params?: string | string[];

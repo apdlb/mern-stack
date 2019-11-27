@@ -1,4 +1,5 @@
 import { message } from 'antd';
+import axios from 'axios';
 import HttpStatus from 'http-status-codes';
 import _ from 'lodash';
 
@@ -10,37 +11,29 @@ export const apiFetch = ({ method, url, body, params, file = false, formData }: 
   if (localStorage.getItem('jwtToken')) headers.Authorization = `Bearer ${localStorage.getItem('jwtToken')}`;
   if (!file) headers['Content-type'] = 'application/json';
 
-  return fetch(urlWithParams(url, params), {
+  return axios({
     method,
-    headers: new Headers(headers),
-    body: !file ? JSON.stringify(body) : formData
+    url: urlWithParams(url, params),
+    headers,
+    data: file ? formData : body
   })
-    .then(v => {
-      if (v.status === HttpStatus.UNAUTHORIZED) {
+    .then((res: any) => {
+      return (res = res.data.data);
+    })
+    .catch((err: any) => {
+      let res = err.response.data;
+
+      if (err.response.status === HttpStatus.UNAUTHORIZED) {
         // Remove token from localStorage and reload page to go to login
         localStorage.removeItem('jwtToken');
         window.location.reload();
-
-        const error = {
-          error: {
-            code: HttpStatus.UNAUTHORIZED,
-            message: 'Unhautorized'
-          }
-        };
-        return error;
-      } else if (v.status === HttpStatus.NO_CONTENT) {
-        return {} as any;
-      } else {
-        return v.json();
+      } else if (err.response.status === HttpStatus.NO_CONTENT) {
+        res = {} as any;
       }
-    })
-    .then(r => {
-      if (r.error) {
-        showErrorMessages(r.error);
 
-        return Promise.reject(r.error);
-      }
-      return (r = r.data);
+      showErrorMessages(res.error);
+
+      return Promise.reject(res.error);
     });
 };
 
